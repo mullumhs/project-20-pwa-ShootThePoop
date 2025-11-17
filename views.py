@@ -1,5 +1,5 @@
 from flask import render_template, request, redirect, url_for, flash
-from models import db # Also import your database model here
+from models import db, Countries # Also import your database model here
 
 # Define your routes inside the 'init_routes' function
 # Feel free to rename the routes and functions as you see fit
@@ -18,6 +18,7 @@ def init_routes(app):
 
     @app.route('/add', methods=['POST'])
     def create_item():
+        new_country = Countries()
         # This route should handle adding a new item to the database.
         return render_template('index.html', message='Item added successfully')
 

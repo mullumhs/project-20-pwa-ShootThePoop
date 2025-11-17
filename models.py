@@ -3,7 +3,7 @@ from datetime import datetime
 
 db = SQLAlchemy()
 
-class Country(db.Model):
+class Countries(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)                # e.g. "Australia"
     continent = db.Column(db.String(50))                            # e.g. "Oceania"
@@ -19,6 +19,3 @@ class Country(db.Model):
     def __repr__(self):
         return f'<Task {self.title}>'
     
-@app.route('/add')
-def add_country():
-    pass
