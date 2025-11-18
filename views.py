@@ -16,11 +16,24 @@ def init_routes(app):
 
 
 
-    @app.route('/add', methods=['POST'])
+    @app.route('/add', methods=['POST','GET'])
     def create_item():
-        new_country = Countries()
+        if request.method == 'POST':
+            new_country = Countries(
+                country = request.form['country'],
+                continent = request.form['continent'],
+                capital_city = request.form['capital_city'],
+                population = request.form['population'],
+                language = request.form['language'],
+                currency = request.form['currency'],
+                map = request.form['map'],
+                flag = request.form['flag']
+            )
+            db.session.add(new_country)
+            db.session.commit()
+            return redirect(url_for('index'))
         # This route should handle adding a new item to the database.
-        return render_template('index.html', message='Item added successfully')
+        return render_template('index.html', message='Country added successfully')
 
 
 
