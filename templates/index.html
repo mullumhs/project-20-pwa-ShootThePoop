@@ -1,3 +1,9 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+%}
+
+<h1>Welcome to My Inventory App</h1>
+
+<!-- Add your page-specific content here -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -15,8 +21,12 @@
 
     <!-- This will later display items from the database -->
     <ul>
-      <li>Sample Item 1</li>
-      <li>Sample Item 2</li>
+      {% for country in countries %}
+      <li>
+        {{country['country']}}, {{country['continent']}},
+        {{country['capital_city']}}
+      </li>
+      {% endfor %}
     </ul>
 
     <h2>Create Item</h2>
@@ -60,3 +70,5 @@
     </form>
   </body>
 </html>
+
+{% endblock %}

@@ -14,8 +14,4 @@ class Countries(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)    # timestamp for record creation
     map = db.Column(db.String())                                    # country map
     flag = db.Column(db.String())                                   # country flag
-
-
-    def __repr__(self):
-        return f'<Task {self.title}>'
     

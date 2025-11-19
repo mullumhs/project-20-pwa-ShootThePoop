@@ -10,9 +10,10 @@ from models import db, Countries # Also import your database model here
 def init_routes(app):
 
     @app.route('/', methods=['GET'])
-    def get_items():
+    def index():
         # This route should retrieve all items from the database and display them on the page.
-        return render_template('index.html', message='Displaying all items')
+        countries = Countries.query.all()
+        return render_template('index.html', message='Displaying all items', countries = countries)
 
 
 
