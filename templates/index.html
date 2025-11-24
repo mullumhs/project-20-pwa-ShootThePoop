@@ -14,7 +14,13 @@
   <body>
     <!-- Display any message passed from the backend -->
     {% if message %}
-    <p><strong>{{ message }}</strong></p>
+    <p>
+      {% with messages = get_flashed_messages() %} {% if messages %} {% for
+      message in messages %}
+      <strong>{{ message }}</strong><br /><br />
+      {% endfor %} {% endif %} {% endwith %}
+      <strong>{{ message }}</strong>
+    </p>
     {% endif %}
 
     <!-- This will later display items from the database -->

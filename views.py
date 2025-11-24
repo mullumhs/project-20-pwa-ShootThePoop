@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, url_for, flash
+from flask import render_template, request, redirect, url_for, flash, Flask
 from models import db, Countries # Also import your database model here
 
 # Define your routes inside the 'init_routes' function
@@ -6,6 +6,11 @@ from models import db, Countries # Also import your database model here
 # You may need to use multiple methods such as POST and GET for each route
 # You can use render_template or redirect as appropriate
 # You can also use flash for displaying status messages
+
+
+app = Flask(__name__)
+
+app.secret_key = "your_secret_key_here"
 
 def init_routes(app):
 
@@ -32,20 +37,36 @@ def init_routes(app):
             )
             db.session.add(new_country)
             db.session.commit()
-            return redirect(url_for('index'))
         # This route should handle adding a new item to the database.
-        return render_template('index.html', message='Country added successfully')
-
+            flash('Country added successfully!')
+            return redirect(url_for('index'))
+        return redirect(url_for('index'))
 
 
     @app.route('/update', methods=['POST'])
     def update_item():
-        # This route should handle updating an existing item identified by the given ID.
-        return render_template('index.html', message=f'Item updated successfully')
+        
+        country_id = request.form['id']
+        country = Countries.query.get_or_404(country_id)
 
+        country.country = request.form['name']
+
+        db.session.commit()
+
+        # This route should handle updating an existing item identified by the given ID.
+        flash('Country updated successfully!')
+        return redirect(url_for('index'))
 
 
     @app.route('/delete', methods=['POST'])
     def delete_item():
+
+        country_id = request.form['id']
+        country = Countries.query.get_or_404(country_id)
+
+        db.session.delete(country)
+        db.session.commit()
+
         # This route should handle deleting an existing item identified by the given ID.
-        return render_template('index.html', message=f'Item deleted successfully')
+        flash('Country deleted successfully!')
+        return redirect(url_for('index'))
