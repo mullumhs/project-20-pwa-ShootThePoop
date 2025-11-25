@@ -51,17 +51,29 @@
                 >Add Country</a
               >
             </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('update_item') }}"
+                >Edit Country</a
+              >
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('delete_item') }}"
+                >Delete Country</a
+              >
+            </li>
           </ul>
 
           <!-- Right side: Login/Register + Search -->
           <ul class="navbar-nav mb-2 mb-lg-0">
             <!-- Login -->
             <li class="nav-item">
-              <a class="nav-link" href="#">Login</a>
+              <a class="nav-link" href="{{ url_for('login') }}">Login</a>
             </li>
             <!-- Register -->
             <li class="nav-item">
-              <a class="nav-link" href="#">Register</a>
+              <a class="nav-link" href="{{ url_for('register') }}">Register</a>
             </li>
           </ul>
         </div>

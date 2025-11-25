@@ -40,33 +40,50 @@ def init_routes(app):
         # This route should handle adding a new item to the database.
             flash('Country added successfully!')
             return redirect(url_for('index'))
-        return redirect(url_for('index'))
+        return render_template('add.html')
 
 
-    @app.route('/update', methods=['POST'])
+    @app.route('/update', methods=['GET', 'POST'])
     def update_item():
-        
-        country_id = request.form['id']
-        country = Countries.query.get_or_404(country_id)
+        if request.method == 'POST':
+            target_name = request.form['country'].strip().lower()
+            country = Countries.query.filter(
+                db.func.lower(Countries.country) == target_name
+            ).first_or_404()
 
-        country.country = request.form['name']
+            # Update only provided fields
+            for field in ['continent', 'capital_city', 'population', 'language', 'currency', 'map', 'flag']:
+                val = request.form.get(field)
+                if val:
+                    setattr(country, field, val)
 
-        db.session.commit()
+            db.session.commit()
+            flash('Country updated successfully!')
+            return redirect(url_for('index'))
+        return render_template('update.html')
 
-        # This route should handle updating an existing item identified by the given ID.
-        flash('Country updated successfully!')
-        return redirect(url_for('index'))
 
 
-    @app.route('/delete', methods=['POST'])
+    @app.route('/delete', methods=['GET', 'POST'])
     def delete_item():
+        if request.method == 'POST':
+            target_name = request.form['country'].strip().lower()
+            country = Countries.query.filter(
+                db.func.lower(Countries.country) == target_name
+            ).first_or_404()
 
-        country_id = request.form['id']
-        country = Countries.query.get_or_404(country_id)
+            db.session.delete(country)
+            db.session.commit()
+            flash('Country deleted successfully!')
+            return redirect(url_for('index'))
+        return render_template('delete.html')
 
-        db.session.delete(country)
-        db.session.commit()
+    
 
-        # This route should handle deleting an existing item identified by the given ID.
-        flash('Country deleted successfully!')
-        return redirect(url_for('index'))
+    @app.route('/login')
+    def login():
+        return render_template('login.html')
+
+    @app.route('/register')
+    def register():
+        return render_template('signup.html')

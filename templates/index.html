@@ -33,44 +33,6 @@
       {% endfor %}
     </ul>
 
-    <h2>Create Item</h2>
-    <!-- Form to create a new item, posts to /add -->
-    <form action="/add" method="POST">
-      <input type="text" name="country" placeholder="Country" required />
-      <input type="text" name="continent" placeholder="Continent" required />
-      <input
-        type="text"
-        name="capital_city"
-        placeholder="Capital City"
-        required
-      />
-      <input
-        type="number"
-        name="population"
-        placeholder="Population"
-        required
-      />
-      <input type="text" name="language" placeholder="Language" required />
-      <input type="text" name="currency" placeholder="Currency" required />
-      <input type="text" name="map" placeholder="Map" required />
-      <input type="text" name="flag" placeholder="Flag" required />
-
-      <button type="submit">Create</button>
-    </form>
-
-    <h2>Update Item</h2>
-    <!-- Form to update an existing item, posts to /update/<id> -->
-    <form action="/update" method="POST">
-      <input type="number" name="id" placeholder="Item ID" required />
-      <input type="text" name="name" placeholder="New Name" required />
-      <button type="submit">Update</button>
-    </form>
-
-    <h2>Delete Item</h2>
-    <!-- Form to delete an existing item, posts to /delete/<id> -->
-    <form action="/delete" method="POST">
-      <input type="number" name="id" placeholder="Item ID" required />
-      <button type="submit">Delete</button>
     </form>
   </body>
 </html>
