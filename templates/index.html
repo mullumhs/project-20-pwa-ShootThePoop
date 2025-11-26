@@ -2,39 +2,42 @@
 %}
 
 <h1>Welcome to CountriesDB</h1>
+<!-- Display any message passed from the backend -->
+{% if message %}
+<p>
+  {% with messages = get_flashed_messages() %} {% if messages %} {% for message
+  in messages %}
+  <strong>{{ message }}</strong><br /><br />
+  {% endfor %} {% endif %} {% endwith %}
+  <strong>{{ message }}</strong>
+</p>
+{% endif %}
 
-<!-- Add your page-specific content here -->
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Countries DB</title>
-  </head>
-  <body>
-    <!-- Display any message passed from the backend -->
-    {% if message %}
-    <p>
-      {% with messages = get_flashed_messages() %} {% if messages %} {% for
-      message in messages %}
-      <strong>{{ message }}</strong><br /><br />
-      {% endfor %} {% endif %} {% endwith %}
-      <strong>{{ message }}</strong>
-    </p>
-    {% endif %}
+<div class="row align-items-start">
+  {% for country in countries %}
+  <div class="col mb-4">
+    <div class="card" style="width: 18rem">
+      <img
+        src="https://flagsapi.com/{{ country['flag'] }}/flat/64.png"
+        class="card-img-top"
+        alt="..."
+      />
+      <div class="card-body">
+        <h5 class="card-title">{{country['country']}}</h5>
+        <p class="card-text">
+          {{country['continent']}}, {{country['capital_city']}}
+        </p>
+        <a href="update" class="btn btn-primary">Edit</a>
+      </div>
 
-    <!-- This will later display items from the database -->
-    <ul>
-      {% for country in countries %}
-      <li>
-        {{country['country']}}, {{country['continent']}},
-        {{country['capital_city']}}
-      </li>
-      {% endfor %}
-    </ul>
-
-    </form>
-  </body>
-</html>
+      <img
+        src="https://placehold.co/300x300"
+        class="card-img-bottom"
+        alt="..."
+      />
+    </div>
+  </div>
+  {% endfor %}
+</div>
 
 {% endblock %}

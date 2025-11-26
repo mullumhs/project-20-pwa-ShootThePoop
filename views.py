@@ -47,11 +47,22 @@ def init_routes(app):
     def update_item():
         if request.method == 'POST':
             target_name = request.form['country'].strip().lower()
+            target_continent = request.form['continent'].strip().lower()
+            target_capital_city = request.form['capital_city'].strip().lower()
             country = Countries.query.filter(
                 db.func.lower(Countries.country) == target_name
             ).first_or_404()
 
-            # Update only provided fields
+            country = Countries.query.filter(
+                db.func.lower(Countries.continent) == target_continent
+            ).first_or_404()
+
+            country = Countries.query.filter(
+                db.func.lower(Countries.capital_city) == target_capital_city
+            ).first_or_404()
+
+
+
             for field in ['continent', 'capital_city', 'population', 'language', 'currency', 'map', 'flag']:
                 val = request.form.get(field)
                 if val:
@@ -77,8 +88,6 @@ def init_routes(app):
             flash('Country deleted successfully!')
             return redirect(url_for('index'))
         return render_template('delete.html')
-
-    
 
     @app.route('/login')
     def login():
