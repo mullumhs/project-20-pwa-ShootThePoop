@@ -27,11 +27,11 @@
         <p class="card-text">
           {{country['continent']}}, {{country['capital_city']}}
         </p>
-        <a href="update" class="btn btn-primary">Edit</a>
+        <a href="view" class="btn btn-primary">View</a>
       </div>
 
       <img
-        src="https://placehold.co/300x300"
+        src="{{ url_for('static', filename='maps/'~ country['flag'] ~ '/1024.png') }}"
         class="card-img-bottom"
         alt="..."
       />

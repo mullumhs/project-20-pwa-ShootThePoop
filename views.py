@@ -96,3 +96,10 @@ def init_routes(app):
     @app.route('/register')
     def register():
         return render_template('signup.html')
+    
+    @app.route('/view/<id>')
+    def view(id):
+        country = Countries.query.filter(db.func.lower(Countries.id) == id).first_or_404()
+
+
+        return render_template('view.html', id=id, country = country)
