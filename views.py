@@ -25,20 +25,25 @@ def init_routes(app):
     @app.route('/add', methods=['POST','GET'])
     def create_item():
         if request.method == 'POST':
-            new_country = Countries(
-                country = request.form['country'],
-                continent = request.form['continent'],
-                capital_city = request.form['capital_city'],
-                population = request.form['population'],
-                language = request.form['language'],
-                currency = request.form['currency'],
-                map = request.form['map'],
-                flag = request.form['flag']
-            )
-            db.session.add(new_country)
-            db.session.commit()
+            result = Countries.query.filter(Countries.country == request.form['country']).first()
+            if result == None:
+                new_country = Countries(
+                    country = request.form['country'],
+                    continent = request.form['continent'],
+                    capital_city = request.form['capital_city'],
+                    population = request.form['population'],
+                    language = request.form['language'],
+                    currency = request.form['currency'],
+                    map = request.form['map'],
+                    flag = request.form['flag']
+                )
+                db.session.add(new_country)
+                db.session.commit()
+                flash('Country added successfully!')
+
+            else:
+                flash('Country already exists')
         # This route should handle adding a new item to the database.
-            flash('Country added successfully!')
             return redirect(url_for('index'))
         return render_template('add.html')
 
