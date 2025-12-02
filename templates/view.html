@@ -1,7 +1,41 @@
 {% extends "base.html" %} {% block title %}Add Country{% endblock %} {% block
 content %}
-<title>View Country</title>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>View Country</title>
+    <h1>Viewing {{country['country']}}</h1>
+  </head>
+  <body>
+    <div class="col mb-4">
+      <div class="card" style="width: 18rem">
+        <img
+          src="https://flagsapi.com/{{ country['flag'] }}/flat/64.png"
+          class="card-img-top"
+          alt="..."
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{country['country']}}</h5>
+          <p class="card-text">
+            {{country['continent']}}, {{country['capital_city']}}
+          </p>
+          <a
+            href="{{ url_for('delete_item', id=country.id) }}"
+            class="btn btn-primary"
+            >Delete</a
+          >
+        </div>
 
-<h1>Viewing {{country['country']}}</h1>
+        <img
+          src="{{ url_for('static', filename='maps/'~ country['flag'] ~ '/1024.png') }}"
+          class="card-img-bottom"
+          alt="Country Flag"
+        />
+      </div>
+    </div>
+  </body>
+</html>
 
 {% endblock %}

@@ -27,13 +27,15 @@
         <p class="card-text">
           {{country['continent']}}, {{country['capital_city']}}
         </p>
-        <a href="view" class="btn btn-primary">View</a>
+        <a href="{{ url_for('view', id=country.id) }}" class="btn btn-primary"
+          >View</a
+        >
       </div>
 
       <img
         src="{{ url_for('static', filename='maps/'~ country['flag'] ~ '/1024.png') }}"
         class="card-img-bottom"
-        alt="..."
+        alt="Country Flag"
       />
     </div>
   </div>

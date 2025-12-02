@@ -22,6 +22,7 @@ def init_routes(app):
 
 
 
+
     @app.route('/add', methods=['POST','GET'])
     def create_item():
         if request.method == 'POST':
@@ -86,7 +87,7 @@ def init_routes(app):
             target_name = request.form['country'].strip().lower()
             country = Countries.query.filter(
                 db.func.lower(Countries.country) == target_name
-            ).first_or_404()
+            ).first()
 
             db.session.delete(country)
             db.session.commit()
@@ -105,6 +106,5 @@ def init_routes(app):
     @app.route('/view/<id>')
     def view(id):
         country = Countries.query.filter(db.func.lower(Countries.id) == id).first_or_404()
-
-
         return render_template('view.html', id=id, country = country)
+    
