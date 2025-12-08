@@ -12,8 +12,8 @@ class Countries(db.Model):
     language = db.Column(db.String(50))                             # e.g. "English"
     currency = db.Column(db.String(50))                             # e.g. "Australian Dollar"
     created_at = db.Column(db.DateTime, default=datetime.utcnow)    # timestamp for record creation
-    map = db.Column(db.String())                                    # country map
-    flag = db.Column(db.String())                                   # country flag
+    country_code = db.Column(db.String())                                    # country map
+                                # country flag
     
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)

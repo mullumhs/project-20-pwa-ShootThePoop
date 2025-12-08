@@ -1,0 +1,9 @@
+{% extends "base.html" %} {% block title %}Add Country{% endblock %} {% block
+content %}
+
+<form action="/search" method="POST">
+  <input type="text" name="country" placeholder="Country" required />
+  <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+{% if country %} {{country}} {% endif %} {% endblock %}

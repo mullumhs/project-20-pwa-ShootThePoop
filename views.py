@@ -22,28 +22,21 @@ def init_routes(app):
 
 
 
-
     @app.route('/add', methods=['POST','GET'])
     def create_item():
         if request.method == 'POST':
-            result = Countries.query.filter(Countries.country == request.form['country']).first()
-            if result == None:
-                new_country = Countries(
-                    country = request.form['country'],
-                    continent = request.form['continent'],
-                    capital_city = request.form['capital_city'],
-                    population = request.form['population'],
-                    language = request.form['language'],
-                    currency = request.form['currency'],
-                    map = request.form['map'],
-                    flag = request.form['flag']
-                )
-                db.session.add(new_country)
-                db.session.commit()
-                flash('Country added successfully!')
-
-            else:
-                flash('Country already exists')
+            new_country = Countries(
+                country = request.form['country'],
+                continent = request.form['continent'],
+                capital_city = request.form['capital_city'],
+                population = request.form['population'],
+                language = request.form['language'],
+                currency = request.form['currency'],
+                country_code = request.form['country_code'],
+            )
+            db.session.add(new_country)
+            db.session.commit()
+            flash('Country added successfully!')
         # This route should handle adding a new item to the database.
             return redirect(url_for('index'))
         return render_template('add.html')
@@ -55,21 +48,11 @@ def init_routes(app):
             target_name = request.form['country'].strip().lower()
             target_continent = request.form['continent'].strip().lower()
             target_capital_city = request.form['capital_city'].strip().lower()
-            country = Countries.query.filter(
-                db.func.lower(Countries.country) == target_name
-            ).first_or_404()
-
-            country = Countries.query.filter(
-                db.func.lower(Countries.continent) == target_continent
-            ).first_or_404()
-
-            country = Countries.query.filter(
-                db.func.lower(Countries.capital_city) == target_capital_city
-            ).first_or_404()
+            country = Countries.query.filter(db.func.lower(Countries.country) == target_name).first_or_404()
 
 
 
-            for field in ['continent', 'capital_city', 'population', 'language', 'currency', 'map', 'flag']:
+            for field in ['continent', 'capital_city', 'population', 'language', 'currency', 'country_code']:
                 val = request.form.get(field)
                 if val:
                     setattr(country, field, val)
@@ -94,17 +77,22 @@ def init_routes(app):
             flash('Country deleted successfully!')
             return redirect(url_for('index'))
         return render_template('delete.html')
+    
+    @app.route('/search', methods=['GET', 'POST'])
+    def search_query():
+        if request.method == 'POST':
+            target_name = request.form['country'].strip().lower()
+            country = Countries.query.filter(
+                db.func.lower(Countries.country) == target_name
+            ).first()
 
-    @app.route('/login')
-    def login():
-        return render_template('login.html')
 
-    @app.route('/register')
-    def register():
-        return render_template('signup.html')
+            return redirect(url_for('search_query'))
+
+
+        return render_template('search.html')
     
     @app.route('/view/<id>')
     def view(id):
         country = Countries.query.filter(db.func.lower(Countries.id) == id).first_or_404()
         return render_template('view.html', id=id, country = country)
-    

@@ -18,14 +18,15 @@
   <div class="col mb-4">
     <div class="card" style="width: 18rem">
       <img
-        src="https://flagsapi.com/{{ country['flag'] }}/flat/64.png"
+        src="https://flagsapi.com/{{ country['country_code'] }}/flat/64.png"
         class="card-img-top"
         alt="..."
       />
       <div class="card-body">
         <h5 class="card-title">{{country['country']}}</h5>
         <p class="card-text">
-          {{country['continent']}}, {{country['capital_city']}}
+          {{country['continent']}}, {{country['capital_city']}},
+          {{country['country_code']}}
         </p>
         <a href="{{ url_for('view', id=country.id) }}" class="btn btn-primary"
           >View</a
@@ -33,7 +34,7 @@
       </div>
 
       <img
-        src="{{ url_for('static', filename='maps/'~ country['flag'] ~ '/1024.png') }}"
+        src="{{ url_for('static', filename='maps/'~ country['country_code'] ~ '/1024.png') }}"
         class="card-img-bottom"
         alt="Country Flag"
       />
