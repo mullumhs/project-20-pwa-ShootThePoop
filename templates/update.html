@@ -1,37 +1,91 @@
-{% extends "base.html" %} {% block title %}Add Country{% endblock %} {% block
-content %}
+{% extends "base.html" %}
+{% block title %}Edit Country{% endblock %}
+{% block content %}
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Update Country</title>
-  </head>
-  <body>
-    <h2>Update Item</h2>
-    <!-- Form to update an existing item, posts to /update/<id> -->
-    <form action="/update" method="POST">
-      <input type="number" name="id" placeholder="Item ID" required />
-      <input type="text" name="country" placeholder="New Name" required />
-      <input
-        type="text"
-        name="continent"
-        placeholder="New Continent"
-        required
-      />
-      <input
-        type="text"
-        name="capital_city"
-        placeholder="New Capital City"
-        required
-      />
+<h1>Edit {{ country.country }}</h1>
 
-      <input type="text" name="flag" placeholder="New Flag" required />
+<form action="{{ url_for('update_item', id=country.id) }}" method="POST">
+  <div class="mb-3">
+    <label class="form-label">Country</label>
+    <input
+      type="text"
+      name="country"
+      class="form-control"
+      value="{{ country.country }}"
+      required
+    />
+  </div>
 
-      <button type="submit">Update</button>
-    </form>
-  </body>
-</html>
+  <div class="mb-3">
+    <label class="form-label">Continent</label>
+    <input
+      type="text"
+      name="continent"
+      class="form-control"
+      value="{{ country.continent }}"
+      required
+    />
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Capital City</label>
+    <input
+      type="text"
+      name="capital_city"
+      class="form-control"
+      value="{{ country.capital_city }}"
+      required
+    />
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Population</label>
+    <input
+      type="number"
+      name="population"
+      class="form-control"
+      value="{{ country.population }}"
+      required
+    />
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Language</label>
+    <input
+      type="text"
+      name="language"
+      class="form-control"
+      value="{{ country.language }}"
+      required
+    />
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Currency</label>
+    <input
+      type="text"
+      name="currency"
+      class="form-control"
+      value="{{ country.currency }}"
+      required
+    />
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">2-Digit Country Code</label>
+    <input
+      type="text"
+      name="country_code"
+      class="form-control"
+      value="{{ country.country_code }}"
+      required
+    />
+  </div>
+
+  <button type="submit" class="btn btn-primary">Save changes</button>
+  <a href="{{ url_for('view', id=country.id) }}" class="btn btn-secondary">
+    Cancel
+  </a>
+</form>
 
 {% endblock %}

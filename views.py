@@ -42,41 +42,47 @@ def init_routes(app):
         return render_template('add.html')
 
 
-    @app.route('/update', methods=['GET', 'POST'])
-    def update_item():
+    @app.route('/update/<int:id>', methods=['GET', 'POST'])
+    def update_item(id):
+        # get country by ID
+        country = Countries.query.get_or_404(id)
+
         if request.method == 'POST':
-            target_name = request.form['country'].strip().lower()
-            target_continent = request.form['continent'].strip().lower()
-            target_capital_city = request.form['capital_city'].strip().lower()
-            country = Countries.query.filter(db.func.lower(Countries.country) == target_name).first_or_404()
-
-
-
-            for field in ['continent', 'capital_city', 'population', 'language', 'currency', 'country_code']:
-                val = request.form.get(field)
-                if val:
-                    setattr(country, field, val)
-
+            # update fields
+            country.country = request.form['country']
+            country.continent = request.form['continent']
+            country.capital_city = request.form['capital_city']
+            country.population = request.form['population']
+            country.language = request.form['language']
+            country.currency = request.form['currency']
+            country.country_code = request.form['country_code']
+    
             db.session.commit()
             flash('Country updated successfully!')
-            return redirect(url_for('index'))
-        return render_template('update.html')
+
+            return redirect(url_for('view', id=country.id))
+
+        # 5. On GET, show the edit form with the existing country data
+        return render_template('update.html', country=country)
 
 
 
-    @app.route('/delete', methods=['GET', 'POST'])
-    def delete_item():
-        if request.method == 'POST':
-            target_name = request.form['country'].strip().lower()
-            country = Countries.query.filter(
-                db.func.lower(Countries.country) == target_name
-            ).first()
 
-            db.session.delete(country)
-            db.session.commit()
-            flash('Country deleted successfully!')
-            return redirect(url_for('index'))
-        return render_template('delete.html')
+
+    @app.route('/delete/<int:id>', methods=['POST'])
+    def delete_item(id):
+
+        country = Countries.query.get_or_404(id)
+
+        db.session.delete(country)
+        db.session.commit()
+
+        flash('Country deleted successfully!')
+        return redirect(url_for('index'))
+
+
+
+
     
     @app.route('/search', methods=['GET', 'POST'])
     def search_query():
@@ -92,7 +98,8 @@ def init_routes(app):
 
         return render_template('search.html')
     
-    @app.route('/view/<id>')
+    @app.route('/view/<int:id>')
     def view(id):
-        country = Countries.query.filter(db.func.lower(Countries.id) == id).first_or_404()
-        return render_template('view.html', id=id, country = country)
+        # find country by ID
+        country = Countries.query.get_or_404(id)
+        return render_template('view.html', country=country)
