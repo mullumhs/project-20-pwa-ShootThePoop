@@ -36,7 +36,6 @@ def init_routes(app):
             )
             db.session.add(new_country)
             db.session.commit()
-            flash('Country added successfully!')
         # This route should handle adding a new item to the database.
             return redirect(url_for('index'))
         return render_template('add.html')
@@ -58,7 +57,6 @@ def init_routes(app):
             country.country_code = request.form['country_code']
     
             db.session.commit()
-            flash('Country updated successfully!')
 
             return redirect(url_for('view', id=country.id))
 
@@ -77,7 +75,6 @@ def init_routes(app):
         db.session.delete(country)
         db.session.commit()
 
-        flash('Country deleted successfully!')
         return redirect(url_for('index'))
 
 
