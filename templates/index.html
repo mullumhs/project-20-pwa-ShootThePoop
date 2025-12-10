@@ -14,10 +14,16 @@
         alt="..."
       />
       <div class="card-body">
-        <h5 class="card-title">{{ country.country }}</h5>
+        <h5 class="card-title" style="margin-bottom: 50px">
+          {{ country.country }}
+        </h5>
         <p class="card-text">
-          {{ country.country }}, {{ country.capital_city }}, {{
-          country.country_code }}
+          Continent: {{ country.continent }} <br />
+          Capital City: {{ country.capital_city }} <br />
+          Country Code: {{ country.country_code }} <br />
+          Population: {{ country.population }} <br />
+          Language: {{ country.language }} <br />
+          Currency: {{ country.currency }}
         </p>
         <a href="{{ url_for('view', id=country.id) }}" class="btn btn-primary"
           >View</a

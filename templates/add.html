@@ -1,29 +1,42 @@
 {% extends "base.html" %} {% block title %}Add Country{% endblock %} {% block
 content %}
 <h1>Add a country</h1>
-<form method="post" action="{{ url_for('create_item') }}">
-  <!-- form fields here -->
 
-  <!-- Form to create a new item, posts to /add -->
-  <form action="/add" method="POST">
-    <input type="text" name="country" placeholder="Country" required />
-    <input type="text" name="continent" placeholder="Continent" required />
-    <input
-      type="text"
-      name="capital_city"
-      placeholder="Capital City"
-      required
-    />
-    <input type="number" name="population" placeholder="Population" required />
-    <input type="text" name="language" placeholder="Language" required />
-    <input type="text" name="currency" placeholder="Currency" required />
-    <input
-      type="text"
-      name="country_code"
-      placeholder="2 Digit Country Code"
-      required
-    />
-    <button type="submit" class="btn btn-primary">Add Country</button>
-  </form>
+<form method="POST" action="{{ url_for('create_item') }}">
+  <div class="mb-3">
+    <label class="form-label">Country</label>
+    <input type="text" name="country" class="form-control" required />
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Continent</label>
+    <input type="text" name="continent" class="form-control" required />
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Capital City</label>
+    <input type="text" name="capital_city" class="form-control" required />
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Population</label>
+    <input type="number" name="population" class="form-control" required />
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Language</label>
+    <input type="text" name="language" class="form-control" required />
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Currency</label>
+    <input type="text" name="currency" class="form-control" required />
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">2-Digit Country Code</label>
+    <input type="text" name="country_code" class="form-control" required />
+  </div>
+  <button type="submit" class="btn btn-primary">Add Country</button>
 </form>
 {% endblock %}

@@ -83,18 +83,17 @@ def init_routes(app):
     
     @app.route('/search', methods=['GET', 'POST'])
     def search_query():
-        if request.method == 'POST':
-            target_name = request.form['country'].strip().lower()
-            country = Countries.query.filter(
-                db.func.lower(Countries.country) == target_name
-            ).first()
-
-
-            return redirect(url_for('search_query'))
-
-
-        return render_template('search.html')
+        search_query = request.args.get('query', '')
+        search_query = search_query.strip().lower()
+        if search_query:
+            items = Countries.query.filter(Countries.country.ilike(f'%{search_query}%')).all()
     
+        else:
+            items = Countries.query.all()
+
+        return render_template('search.html', items=items)
+    
+
     @app.route('/view/<int:id>')
     def view(id):
         # find country by ID

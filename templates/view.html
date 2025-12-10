@@ -9,12 +9,20 @@ content %}
       src="https://flagsapi.com/{{ country.country_code }}/flat/64.png"
       class="card-img-top"
       alt="Flag"
+      style="margin-bottom: -50px"
     />
 
     <div class="card-body">
-      <h5 class="card-title">{{ country.country }}</h5>
+      <h5 class="card-title" style="margin-bottom: 50px">
+        {{ country.country }}
+      </h5>
       <p class="card-text">
-        {{ country.continent }}, {{ country.capital_city }}
+        Continent: {{ country.continent }} <br />
+        Capital City: {{ country.capital_city }} <br />
+        Country Code: {{ country.country_code }} <br />
+        Population: {{ country.population }} <br />
+        Language: {{ country.language }} <br />
+        Currency: {{ country.currency }}
       </p>
 
       <!-- Edit button -->

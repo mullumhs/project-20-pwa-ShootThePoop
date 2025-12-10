@@ -1,9 +1,31 @@
-{% extends "base.html" %} {% block title %}Add Country{% endblock %} {% block
-content %}
-
-<form action="/search" method="POST">
-  <input type="text" name="country" placeholder="Country" required />
-  <button type="submit" class="btn btn-primary">Search</button>
+{% extends "base.html" %} {% block title %} Search - My Inventory App {%
+endblock %} {% block content %}
+<form action="{{ url_for('search_query') }}" method="get" class="d-flex mb-3">
+  <input
+    class="form-control me-2"
+    type="search"
+    name="query"
+    placeholder="Search..."
+    aria-label="Search"
+  />
+  <button class="btn btn-outline-success" type="submit">Search</button>
 </form>
 
-{% if country %} {{country}} {% endif %} {% endblock %}
+<!-- Results -->
+{% if items %}
+<ul class="list-group">
+  {% for country in items %}
+  <li class="list-group-item">
+    <strong>{{ country.country }}</strong>, a country in
+    <strong>{{ country.continent }}</strong>
+    with the capital city of <strong>{{ country.capital_city }}</strong>. The
+    population is roughly <strong>{{ country.population }}</strong> and the main
+    language is <strong>{{ country.language }}</strong>. Be sure to carry some
+    <strong>{{ country.currency }}</strong>.
+  </li>
+  {% endfor %}
+</ul>
+
+{% else %}
+<p>No countries found.</p>
+{% endif %} {% endblock %}
