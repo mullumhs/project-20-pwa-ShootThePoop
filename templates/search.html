@@ -15,17 +15,25 @@ endblock %} {% block content %}
 {% if items %}
 <ul class="list-group">
   {% for country in items %}
-  <li class="list-group-item">
-    <strong>{{ country.country }}</strong>, a country in
-    <strong>{{ country.continent }}</strong>
-    with the capital city of <strong>{{ country.capital_city }}</strong>. The
-    population is roughly <strong>{{ country.population }}</strong> and the main
-    language is <strong>{{ country.language }}</strong>. Be sure to carry some
-    <strong>{{ country.currency }}</strong>.
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    <div>
+      <strong>{{ country.country }}</strong>, a country in
+      <strong>{{ country.continent }}</strong> with the capital city of
+      <strong>{{ country.capital_city }}</strong>. The population is roughly
+      <strong>{{ country.population }}</strong> and the main language is
+      <strong>{{ country.language }}</strong>. Be sure to carry some
+      <strong>{{ country.currency }}</strong>.
+    </div>
+    <a
+      href="{{ url_for('view', id=country.id) }}"
+      class="btn btn-primary"
+      style="margin: 20px"
+    >
+      View
+    </a>
   </li>
   {% endfor %}
 </ul>
-
 {% else %}
 <p>No countries found.</p>
 {% endif %} {% endblock %}
