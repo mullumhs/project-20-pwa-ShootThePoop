@@ -1,5 +1,6 @@
 from flask import render_template, request, redirect, url_for, flash, Flask
 from models import db, Countries # Also import your database model here
+from sqlalchemy import or_, cast, String
 
 def init_routes(app):
 
@@ -72,11 +73,19 @@ def init_routes(app):
     
     @app.route('/search', methods=['GET', 'POST'])
     def search_query():
-        search_query = request.args.get('query', '')
-        search_query = search_query.strip().lower()
+        search_query = request.args.get('query', '').strip()
         if search_query:
-            items = Countries.query.filter(Countries.country.ilike(f'%{search_query}%')).all()
-    
+            items = Countries.query.filter(
+                or_(
+                
+                    Countries.country.ilike(f'%{search_query}%'),
+                    Countries.continent.ilike(f'%{search_query}%'),
+                    Countries.capital_city.ilike(f'%{search_query}%'),
+                    Countries.language.ilike(f'%{search_query}%'),
+                    Countries.currency.ilike(f'%{search_query}%'),
+                    cast(Countries.population, String).ilike(f"%{search_query}%"),
+                )
+            ).all()
         else:
             items = Countries.query.all()
 
