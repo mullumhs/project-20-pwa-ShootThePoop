@@ -1,6 +1,5 @@
-{% extends "base.html" %}
-{% block title %}Edit Country{% endblock %}
-{% block content %}
+{% extends "base.html" %} {% block title %}Edit Country{% endblock %} {% block
+content %}
 
 <h1>Edit {{ country.country }}</h1>
 
@@ -11,6 +10,7 @@
       type="text"
       name="country"
       class="form-control"
+      placeholder="eg: 'Australia'"
       value="{{ country.country }}"
       required
     />
@@ -22,6 +22,7 @@
       type="text"
       name="continent"
       class="form-control"
+      placeholder="eg: 'Africa'"
       value="{{ country.continent }}"
       required
     />
@@ -33,6 +34,7 @@
       type="text"
       name="capital_city"
       class="form-control"
+      placeholder="eg: 'Canberra'"
       value="{{ country.capital_city }}"
       required
     />
@@ -44,6 +46,7 @@
       type="number"
       name="population"
       class="form-control"
+      placeholder="eg: '5930456'"
       value="{{ country.population }}"
       required
     />
@@ -55,6 +58,7 @@
       type="text"
       name="language"
       class="form-control"
+      placeholder="eg: 'English'"
       value="{{ country.language }}"
       required
     />
@@ -66,6 +70,7 @@
       type="text"
       name="currency"
       class="form-control"
+      placeholder="eg: 'USD'"
       value="{{ country.currency }}"
       required
     />
@@ -77,6 +82,7 @@
       type="text"
       name="country_code"
       class="form-control"
+      placeholder="eg: 'AU'"
       value="{{ country.country_code }}"
       required
     />

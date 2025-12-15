@@ -4,10 +4,10 @@
 <h1>Welcome to CountriesDB</h1>
 <!-- Display any message passed from the backend -->
 
-<div class="row align-items-start">
+<div class="row justify-content-start">
   {% for country in countries %}
-  <div class="col mb-4">
-    <div class="card" style="width: 18rem">
+  <div class="col-md-6 col-lg-3 mb-4">
+    <div class="card" style="width: 100%">
       <img
         src="https://flagsapi.com/{{ country['country_code'] }}/flat/64.png"
         class="card-img-top"

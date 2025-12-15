@@ -5,37 +5,79 @@ content %}
 <form method="POST" action="{{ url_for('create_item') }}">
   <div class="mb-3">
     <label class="form-label">Country</label>
-    <input type="text" name="country" class="form-control" required />
+    <input
+      type="text"
+      name="country"
+      placeholder="eg: 'Australia'"
+      class="form-control"
+      required
+    />
   </div>
 
   <div class="mb-3">
     <label class="form-label">Continent</label>
-    <input type="text" name="continent" class="form-control" required />
+    <input
+      type="text"
+      name="continent"
+      placeholder="eg: 'Africa'"
+      class="form-control"
+      required
+    />
   </div>
 
   <div class="mb-3">
     <label class="form-label">Capital City</label>
-    <input type="text" name="capital_city" class="form-control" required />
+    <input
+      type="text"
+      name="capital_city"
+      placeholder="eg: 'Canberra'"
+      class="form-control"
+      required
+    />
   </div>
 
   <div class="mb-3">
     <label class="form-label">Population</label>
-    <input type="number" name="population" class="form-control" required />
+    <input
+      type="number"
+      name="population"
+      placeholder="eg: '5930456'"
+      class="form-control"
+      required
+    />
   </div>
 
   <div class="mb-3">
     <label class="form-label">Language</label>
-    <input type="text" name="language" class="form-control" required />
+    <input
+      type="text"
+      name="language"
+      placeholder="eg: 'English'"
+      class="form-control"
+      required
+    />
   </div>
 
   <div class="mb-3">
     <label class="form-label">Currency</label>
-    <input type="text" name="currency" class="form-control" required />
+    <input
+      type="text"
+      name="currency"
+      placeholder="eg: 'USD'"
+      class="form-control"
+      required
+    />
   </div>
 
   <div class="mb-3">
     <label class="form-label">2-Digit Country Code</label>
-    <input type="text" name="country_code" class="form-control" required />
+    <input
+      type="text"
+      name="country_code"
+      placeholder="eg: 'AU'"
+      class="form-control"
+      required
+    />
   </div>
   <button type="submit" class="btn btn-primary">Add Country</button>
 </form>
