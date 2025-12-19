@@ -1,0 +1,104 @@
+/* everything */
+
+body {
+    background-color: #f8f9fa;
+}
+
+h1, h2, h3 {
+    font-weight: 600;
+}
+
+/* --- navbar ------ */
+
+.navbar {
+    border-bottom: 1px solid #dee2e6;
+    margin-bottom: 20px;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+/* -------- cards --------- */
+
+.card {
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
+}
+
+.card-title {
+    font-size: 1.2rem;
+}
+
+/* -------- buttons -------- */
+
+.btn {
+    border-radius: 8px;
+}
+
+.btn-warning {
+    color: #000;
+}
+
+/* --------- forms -------- */
+
+.form-control {
+    border-radius: 8px;
+}
+
+.form-select {
+    border-radius: 8px;
+}
+
+label {
+  font-weight: 500;
+}
+
+/* -------- search results -------- */
+
+.list-group-item {
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+/* --------- index ------- */
+
+.card img {
+  border-radius: 10px;
+}
+
+.card-body p {
+  line-height: 1.6;
+}
+
+/* ------- delete confirmation thing ------ */
+
+.modal-content {
+  border-radius: 14px;
+}
+
+/* ------- footer -------- */
+
+.container {
+  padding-bottom: 40px;
+}
+
+/* ----- search results alternating ----- */
+.list-group-item:nth-child(even) {
+  background-color: #f2f2f2; /* light grey */
+}
+
+.list-group-item:nth-child(odd) {
+  background-color: #ffffff; /* white */
+}
+
+.list-group-item:hover {
+  background-color: #e9ecef;
+}
